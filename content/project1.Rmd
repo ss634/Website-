@@ -1,0 +1,122 @@
+---
+title: "Project"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidyr)
+ss <- read.csv("~/m500_lap_time_rank_ver5.csv")
+ss1 <-ss%>%select(-Season,-Series,-Day,-City,-Group,-Group,-Country,-Year,-Month,-Distance,-Round,-Num_Skater,-Name,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
+ss2 <-ss%>%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-Distance,-Round,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-time_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+Import data and use pivot_longer() to undity. Then use pivot_wider() to tidy data.
+
+```{r pressure, echo=FALSE}
+ss1_longer <- ss1%>%pivot_longer(cols=-c("time_lap1"), names_to = "time_of_lap", values_to = "Value")
+ss2<-as.data.frame(ss2)
+ss2_longer <- ss2%>%pivot_longer(cols=-c("Name"), names_to = "Skater Info", values_to = "Value")
+```
+
+Join two data sets. Eliminate unnescessary cases.
+```{r}
+skating <- ss1%>%full_join(ss2)
+skating_NA <- skating %>% na.omit()
+```
+
+Use filter() and summarize() to find the fastest (aka the lowest) total time of skater Yuri CONFORTOLA. 
+```{r}
+skating_NA%>% filter(Name=="Yuri CONFORTOLA")%>%summarize(min(Time))
+```
+
+Use select() to make a dataset without Skater Number (Num_Skater) since the data already has skater names so you can identify the skater and you don't want to look at excess data. 
+```{r}
+No_Num_Skater <-skating_NA%>%select(-Num_Skater)
+glimpse(No_Num_Skater)
+```
+
+Use arrange() and group_by() to make a dataset that contain the mean of skaters' times for time_lap1
+```{r}
+skater_mean_lap1 <- No_Num_Skater%>%group_by(Name)%>%summarize(mean_rank=mean(time_lap1,na.rm=T))%>%arrange(mean_rank)
+glimpse(skater_mean_lap1)
+```
+Use mutate() 
+```{r}
+No_Num_Skater%>%ungroup()%>%mutate(total_lap=time_lap1+time_lap2)%>%arrange(desc(Name))%>%filter(total_lap==min(total_lap))
+```
+The fastest time was 15.05 ssecond for from seasons spanning 2012-2016 and there were three skaters that were able to obtain the fastest score throughout the years: Vladimir Grigorev, Patrick Duffy, and Bufberg Suh Fabrice.  
+
+Use summary statistics (mean,min,max,sd,var) for each of the numeric variables both overall and after grouping by one of the categorical variables. 
+```{r}
+Skater_Sum_1 <- No_Num_Skater%>%summarize_if(is.numeric,funs(mean,min,max,sd,var))%>%glimpse()
+Skater_Sum_1_final <-Skater_Sum_1%>%select(-Group_mean,-Group_sd,-Group_var)%>%glimpse()
+Skater_Sum <- No_Num_Skater%>%group_by(Name)%>%select(-Group)%>%summarize_if(is.numeric,funs(mean,min,max,sd,var))
+Skater_Sum_NA <- Skater_Sum%>%na.omit()
+```
+
+Find the correlation values for the numeric variables.
+```{r}
+cor <- Skater_Sum_NA%>%select_if(is.numeric)
+Skater_Sum_NA_cor <-cor(cor)%>%as.data.frame%>%rownames_to_column%>%pivot_longer(-1,names_to="name",values_to="correlation")
+glimpse(Skater_Sum_NA_cor)
+```
+
+Make a correlation heatmap of the numeric variables.
+```{r}
+Skater_Sum_NA%>%select_if(is.numeric)%>%cor%>%as.data.frame%>%rownames_to_column%>%pivot_longer(-1)%>%ggplot(aes(rowname,name,fill=value))+geom_tile()+geom_text(aes(label=round(value,2)))+xlab("")+ylab("")+scale_fill_gradient2(low="red",high="blue")+theme(axis.text.x = element_text(angle=90, hjust=1))
+```
+
+Make a ggplot 
+```{r}
+Lap_2_Time_Min <- Skater_Sum_NA%>% slice(1:10)
+time_lap2_plot <- ggplot(data = Lap_2_Time_Min, aes(x = time_lap2_min, y = Time_min, color =Name)) + geom_point() 
+time_lap2_plot + ggtitle("Skaters' Min Lap 2 Times") + ylab("Total Minimum Time (seconds)") + xlab("Minimum Lap 2 Time (seconds)") + scale_color_manual(name = "Name", labels = c("Adam FILIPOWICZ", "AGDESTEIN Einar", "Akash ARADHYA", "Alexander FATHOULLIN", "Aliaksandr ANTANENKA", "Aliaksandr VOLKAU", "ALMEY Jens", "Alvaro PENA", "AN Kai", "AN Victor"), values = c("pink", "purple", "red", "green", "blue", "magenta", "orange", "gray", "black", "yellow"))
+
+```
+
+Make another ggplot
+```{r}
+No_Num_Name_Skater <- No_Num_Skater%>%select(-Name)
+ggplot02 <- ggplot(No_Num_Name_Skater, aes(x = Group,time_lap1))+ geom_point(size=3,aes(color= time_lap2))+scale_color_gradient(low="blue", high="red") + theme(axis.text.x = element_text(angle=90, hjust=1))
+ggplot02 + ggtitle(" Lap 1 and 2 Times for Skaters ") + ylab("Lap 2 Times (sec)") + xlab("Group Number") 
+```
+
+```{r}
+ggplot01 <- ggplot(data = No_Num_Name_Skater, aes(x = time_lap1, y = time_lap2, color = Group)) + geom_bar(stat="summary")+scale_color_gradient(low="blue", high="red")
+ggplot01 + ggtitle(" Lap 1 and 2 Times for Skaters ") + ylab("Lap 2 Times (sec)") + xlab("Lap 1 Times (sec)") 
+```
+
+
+
+```{r}
+library(cluster)
+sil_width<-vector()
+for(i in 2:10){
+pam_fit <- No_Num_Skater%>%select(-Name)%>%pam(i)
+sil_width[i] <- pam_fit$silinfo$avg.width
+}
+ggplot()+geom_line(aes(x=1:10,y=sil_width))+scale_x_continuous(name="k",breaks=1:10)
+```
+
+```{r}
+pam2<-No_Num_Skater%>%select(-Name)%>%pam(3)
+final <- No_Num_Skater%>%mutate(cluster=as.factor(pam2$clustering))
+ggplot(final, aes(x=Time,y=time_lap2,color=cluster))+geom_point()
+```
+
