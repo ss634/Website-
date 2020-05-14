@@ -1,75 +1,3 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Shreya Singh" />
-    <meta name="description" content="Describe your website">
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-    <title>Project</title>
-    <meta name="generator" content="Hugo 0.70.0" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/main.css" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
-    
-    <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
-    
-  </head>
-
-  <body>
-    <div id="wrap">
-
-      
-      <nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="../"><i class="fa fa-home"></i></a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-        <li><a href="../blog/">BLOG</a></li>
-        
-        <li><a href="../projects/">PROJECTS</a></li>
-        
-        <li><a href="../resume.pdf">RESUME</a></li>
-        
-      
-      </ul>
-    </div>
-  </div>
-</nav>
-
-      
-      <div class="container">
-        <div class="blog-post">
-          <h3>
-            <strong><a href="../project1/">Project</a></strong>
-          </h3>
-        </div>
-        <div class="blog-title">
-          <h4>
-          January 1, 0001
-            &nbsp;&nbsp;
-            
-          </h4>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="blogpost">
-              
 
 
 <p>Shreya Singh (ss77555)</p>
@@ -187,15 +115,15 @@ glimpse(Skater_Sum_NA_cor)</code></pre>
 ## $ name        &lt;chr&gt; &quot;Time_mean&quot;, &quot;time_lap1_mean&quot;, &quot;time_lap2_mean&quot;, &quot;Time_mi…
 ## $ correlation &lt;dbl&gt; 1.00000000, 0.58719659, 0.81705848, 0.68675184, 0.6114404…</code></pre>
 <pre class="r"><code>Skater_Sum_NA%&gt;%select_if(is.numeric)%&gt;%cor%&gt;%as.data.frame%&gt;%rownames_to_column%&gt;%pivot_longer(-1)%&gt;%ggplot(aes(rowname,name,fill=value))+geom_tile()+geom_text(aes(label=round(value,2)))+xlab(&quot;&quot;)+ylab(&quot;&quot;)+scale_fill_gradient2(low=&quot;red&quot;,high=&quot;blue&quot;)+theme(axis.text.x = element_text(angle=90, hjust=1))</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>Lap_2_Time_Min &lt;- Skater_Sum_NA%&gt;% slice(1:10)
 time_lap2_plot &lt;- ggplot(data = Lap_2_Time_Min, aes(x = time_lap2_min, y = Time_min, color =Name)) + geom_point() 
 time_lap2_plot + ggtitle(&quot;Skaters&#39; Min Lap 2 Times by Skater Name&quot;) + ylab(&quot;Total Minimum Time (seconds)&quot;) + xlab(&quot;Minimum Lap 2 Time (seconds)&quot;) + scale_color_manual(name = &quot;Name&quot;, labels = c(&quot;Adam FILIPOWICZ&quot;, &quot;AGDESTEIN Einar&quot;, &quot;Akash ARADHYA&quot;, &quot;Alexander FATHOULLIN&quot;, &quot;Aliaksandr ANTANENKA&quot;, &quot;Aliaksandr VOLKAU&quot;, &quot;ALMEY Jens&quot;, &quot;Alvaro PENA&quot;, &quot;AN Kai&quot;, &quot;AN Victor&quot;), values = c(&quot;pink&quot;, &quot;purple&quot;, &quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;magenta&quot;, &quot;orange&quot;, &quot;gray&quot;, &quot;black&quot;, &quot;yellow&quot;))</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>No_Num_Name_Skater &lt;- No_Num_Skater%&gt;%select(-Name)
 ggplot02 &lt;- ggplot(No_Num_Name_Skater, aes(x = Group,Time))+ geom_point(size=3,aes(color= time_lap2))+scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;) + theme(axis.text.x = element_text(angle=90, hjust=1))
 ggplot02 + ggtitle(&quot; Total Time and Group Number by Lap 2 Times &quot;) + ylab(&quot;Total Times (sec)&quot;) + xlab(&quot;Group Number&quot;) + scale_x_continuous(breaks = seq(0, 50,5))</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Visualizing</p>
 <p>The correlation values for the numeric variables were found and used to make a correlation heatmap. This gave an indication of which variables had the highest correlations which was later used to create another additional ggplot() graph to further explore the realtionship that existed between those two variables. The argument select_if(is.numeric) was used to insure that only the numeric values would be used for the correlation heat map and a categorical variable was not in the mix. Naturally anything had a correlation of 1 with itself. Only a handful of variables had a high correlation value of 0.8-0.9 with each other. I choose to create the graph comparing the summary statistics values of lap 1 and 2 minimum times by the skaters’ names since the minimum lap 1 and 2 times had a high correlation value of 0.97. Interestingly, the graph showed a linear relationship for the first 10 skaters choosen alphabetically. The positive linear realtionship made sense in the fact that if a skater was fast and scored on the lower end for the first lap, they would likely also have a fast and low numberical value for their lap 2 time. The interesting aspect of the graph was that, by coincidence, the first 10 skaters ended up displaying a positive straight line moving to the right in the first quadrant of the graph. Tnere existed a possibility for them to be clustered on one section of the graph or perhaps in patches across the graph in a fashion similar to the times of skaters Almey Jens and An Kai but instead, their data displayed a nearly straight line. As mentioned earlier in the introduction, I wanted to see if a relationship existed between skater times and some random number the athletes were assigned as their group numbers. According to the graph that explores the total overall times and group numbers of the skaters by their lap 2 times, it seemed that group numbers 11 and after contained less of the slower skaters than group numbers 10 and before. That being said, there were more skaters in the earlier numbered groups, particularly groups 1-8, so by probability they are more likely to have contained slower skaters. Overall, there was not a definitive relationship between group number and skater times since the arrangement of slower skaters towards the first half of the group numbers may have been due to chance alone and no clear pattern exisited in the data itself though it was still an interesting aspect of the data to explore.</p>
 <pre class="r"><code>library(cluster)
@@ -222,7 +150,7 @@ sil_width[i] &lt;- skate$silinfo$avg.width
 
 ## Warning in as.dist.default(x): non-square matrix</code></pre>
 <pre class="r"><code>ggplot()+geom_path(aes(x=2:10,y=sil_width[2:10]))</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>library(GGally)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;GGally&#39;</code></pre>
@@ -231,67 +159,10 @@ sil_width[i] &lt;- skate$silinfo$avg.width
 ##     nasa</code></pre>
 <pre class="r"><code>skateclust&lt;-No_Num_Skater%&gt;%select(1:4)%&gt;%pam(k=2)
 No_Num_Skater%&gt;%ggpairs(columns = 1:4)</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>No_Num_Skater%&gt;%mutate(cluster=as.factor(skateclust$clustering))%&gt;%ggpairs(columns = 1:4,aes(color=cluster))</code></pre>
-<p><img src="../project1_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p><img src="project1_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <p>Dimensionality Reduction</p>
 <p>I ran library(cluster) and library(GGally) to import the fucntions into the environment so the code will run correctly and the document will knit. The data set skate was creating containing columns 1-4 and used to calculate the distances (dissimilarities) in the data in order to find the closest cluster for each observation. Pam(k=i,diss=T) was used to find the number of clusters that would be used. The vector sil_width was created to house the the average dissimilarity between i and all other objects in the data set skate. Then a ggplot was created with sil_width[2:10] on the y-axis and k values 2-10 on the x-axis to visualize the value of k that would be used later.<br />
 The data set skateclust was created with 2 clusters (k=2) now that the value of k was known.Then ggpair() with color was run to visualize the data with the clearest separation amongst the clusters. Clustering was used to partition the data into several groups based on their similarity and PAM was used to find data clusters with minimal average dissimilarity to all the objects in the cluster called medoids that are centrally located in clusters. The highest correlation was between time lap 2 and time with a value of 0.481 followed by time lap 2 and time lap 1 with a value of 0.292 and then time lap 1 and time with a value of 0.251. It seems that the observations related to times had a higher correlation with each other than any of the times did with the group numbers. Group is also the only variable that has a cluster that has a negative correlation with the other variables, namely cluster cluster two, so the two variables would move in opposite directions. This would explain why the curved density distributions between the two clusters are almost exactly in line with each other for time, time_lap1, and time_lap2 however for group there is a clear distinction between the two clusters. The first cluster has four distinct sections or dramatic dips while the second cluster has less dramatic dips and there are less distinct sections though the range for cluster 2 is greater than the range for cluster 1.</p>
 </div>
-
-              <hr>
-              <div class="related-posts">
-                <h5>Related Posts</h5>
-                
-              </div>
-            </div>
-          </div>
-          <hr>
-        <div class="disqus">
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-
-    (function() {
-      
-      
-      if (window.location.hostname == "localhost")
-        return;
-
-      var disqus_shortname = '';
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-        </div>
-      </div>
-      
-    </div>
-
-    
-    <footer>
-  <div id="footer">
-    <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
-      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
-    </div>
-  </div>
-</footer>
-<div class="footer"></div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="../js/docs.min.js"></script>
-<script src="../js/main.js"></script>
-
-<script src="../js/ie10-viewport-bug-workaround.js"></script>
-
-
-    
-  </body>
-</html>
