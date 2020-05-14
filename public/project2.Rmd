@@ -285,12 +285,6 @@ diags%>%summarize_all(mean)
 ```
 This model’s out-of-sample accuracy of 0.9375 was close to rthe auc of logistic regression in part 5 which was 0.9812500. Given these results, the 0.98 was more accurate. Ignoring the names which had no real life effect on cancer, alkhol appeared to be an important predictor of cancer. Age and AreaQ were retained as well. 
 
-
-
-- **0. (5 pts)** Introduce your dataset and each of your variables (or just your main variables if you have lots) in a paragraph. What are they measuring? How many observations?
-
-
-
 ...
 
 
