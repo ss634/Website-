@@ -31,11 +31,7 @@ string5="ATGGCAATAACCCCCCGTTTCTACTTCTAGAGGAGAAAAGTATTGACATGAGCGCTCCCGGCACAAGGGCC
 Solution by using re.findall() to match restriction enzyme binding sites ANTAAT and GCRWTG
 ```{python}
 re.findall(r'(A.TAAT)|(GC[AG][AT]TG)', string5)
-# I was expecting to make 4 cuts and 5 fragments
 ```
-
-```{python}
-# [('', 'GCGTTG'), ('ATTAAT', ''), ('', 'GCAATG'), ('ACTAAT', '')]
-```
+Answer: I was expecting to make 4 cuts and 5 fragments
 
 ![](pythonpic.png)
