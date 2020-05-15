@@ -24,17 +24,6 @@
     </item>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/blog/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
-    </item>
-    
-    <item>
       <title>Creating a New Theme</title>
       <link>/blog/creating-a-new-theme/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
@@ -98,6 +87,15 @@ The data for this project explores the world of short track speed skating via da
       <guid>/project2/</guid>
       <description>library(tidyr) set.seed(348) library(ggplot2) library(sandwich) library(lmtest) library(tidyverse) library(glmnet) library(Matrix) library(dbplyr) Shreya Singh (ss77555)
 Introduction This dataset concerning lung cancer had 59 observations per 8 columns. The variables included Name, Surname, Age, number of smokes (Smokes), Area of cancer per cubic centimeter (AreaQ), number of alcoholic drinks (Alkhol), location of the patient to see if they lived in the city or a rural area (Loc), and whether the patient had cancer or not (Result).</description>
+    </item>
+    
+    <item>
+      <title>Python Use</title>
+      <link>/blog/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
+      <description>install.packages(&amp;quot;reticulate&amp;quot;) ## Installing package into &amp;#39;/stor/home/ss77555/R/x86_64-pc-linux-gnu-library/3.4&amp;#39; ## (as &amp;#39;lib&amp;#39; is unspecified) library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkable useful even many aspects including biology. Working in labs there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in HW 11 from my SDS348 class.</description>
     </item>
     
   </channel>
