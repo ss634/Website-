@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Shreya Singh" />
+    <meta name="description" content="Describe your website">
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <title>Project</title>
+    <meta name="generator" content="Hugo 0.70.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../blog/">BLOG</a></li>
+        
+        <li><a href="../projects/">PROJECTS</a></li>
+        
+        <li><a href="../resume.pdf">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../project1.knit/">Project</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 1, 0001
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              <p>Shreya Singh (ss77555)</p>
+<h1 id="introduction">Introduction</h1>
+<p>The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld &ldquo;ss1&rdquo; contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled &ldquo;ss2&rdquo; contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters&rsquo; numbers, and the skaters&rsquo; names. Speed skating has always been interesting since it is hard to believe humans can race several miles per hour at very difficult angles. I wanted to see how skaters fared against one another spanning several seasons since the fastest person durnig one season may not be the fastest in another season. I also wanted to see what the fastest time was during those seasons and if it was held by the same person throughout the seasons. Additionally, I was interested to see if there would perhaps be any corrolation between a skater&rsquo;s group number and their times though I suspected this would not be the case since the group number should have just been an arbitrary number assigned to the skaters which have no bearing on their performance.</p>
+<h2 id="including-plots">Including Plots</h2>
+<h2 id="pivot-use">Pivot Use</h2>
+<p>Utilzing pivot_longer() to tidy the data for both datasets and go from wide to long data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">skating <span style="color:#f92672">&lt;-</span> ss1<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">full_join</span>(ss2)
+</code></pre></div><pre><code>## Joining, by = &quot;Time&quot;
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">skating_NA <span style="color:#f92672">&lt;-</span> skating <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">na.omit</span>()
+</code></pre></div><h2 id="joiningmerging">Joining/Merging</h2>
+<p>I used full_join() to combine both datas by the variable &ldquo;Time&rdquo; that they both contained. Full_join() was the best option since I wanted to keep all the skaters, keep all the other variables and have them be their own column, and have &ldquo;Time&rdquo; as its own column as well. I omitted any NAs as they would not be useful when trying to gather facts such as mean, max, sd, etc. later on.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">skating_NA<span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">filter</span>(Name<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;Yuri CONFORTOLA&#34;</span>)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">summarize</span>(<span style="color:#a6e22e">min</span>(Time))
+</code></pre></div><pre><code>##   min(Time)
+## 1    41.562
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">No_Num_Skater <span style="color:#f92672">&lt;-</span>skating_NA<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#f92672">-</span>Num_Skater)
+<span style="color:#a6e22e">glimpse</span>(No_Num_Skater)
+</code></pre></div><pre><code>## Observations: 10,598
+## Variables: 5
+## $ Time      &lt;dbl&gt; 43.459, 43.790, 43.790, 43.790, 44.676, 46.462, 42.776, 42.…
+## $ time_lap1 &lt;dbl&gt; 7.52, 7.44, 7.44, 7.44, 7.64, 7.46, 7.08, 7.08, 7.08, 6.95,…
+## $ time_lap2 &lt;dbl&gt; 9.22, 9.31, 9.31, 9.31, 9.74, 9.93, 9.18, 9.18, 9.18, 9.24,…
+## $ Group     &lt;int&gt; 1, 1, 5, 6, 1, 1, 2, 7, 6, 2, 8, 2, 2, 3, 1, 2, 7, 3, 3, 3,…
+## $ Name      &lt;fct&gt; Yuri CONFORTOLA, Serhiy LIFYRENKO, DOTTI Tommaso, PETRE War…
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">skater_mean_lap1 <span style="color:#f92672">&lt;-</span> No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_by</span>(Name)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">summarize</span>(mean_rank<span style="color:#f92672">=</span><span style="color:#a6e22e">mean</span>(time_lap1,na.rm<span style="color:#f92672">=</span>T))<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">arrange</span>(mean_rank)
+<span style="color:#a6e22e">glimpse</span>(skater_mean_lap1)
+</code></pre></div><pre><code>## Observations: 304
+## Variables: 2
+## $ Name      &lt;fct&gt; Liam McFARLANE, Michael GILDAY, WU Dajing, HAMELIN Charles,…
+## $ mean_rank &lt;dbl&gt; 6.895556, 6.903571, 6.911745, 6.920632, 6.926396, 6.943295,…
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">ungroup</span>()<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">mutate</span>(total_lap<span style="color:#f92672">=</span>time_lap1<span style="color:#f92672">+</span>time_lap2)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">arrange</span>(<span style="color:#a6e22e">desc</span>(Name))<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">filter</span>(total_lap<span style="color:#f92672">==</span><span style="color:#a6e22e">min</span>(total_lap))
+</code></pre></div><pre><code>##     Time time_lap1 time_lap2 Group                Name total_lap
+## 1 41.949      6.59      8.46     1   Vladimir GRIGOREV     15.05
+## 2 41.949      6.59      8.46     2       Patrick DUFFY     15.05
+## 3 41.949      6.59      8.46     2 DUFBERG SUH Fabrice     15.05
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Skater_Sum_1 <span style="color:#f92672">&lt;-</span> No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">summarize_if</span>(is.numeric,<span style="color:#a6e22e">funs</span>(mean,min,max,sd,var))<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">glimpse</span>()
+</code></pre></div><pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## Please use a list of either functions or lambdas: 
+## 
+##   # Simple named list: 
+##   list(mean = mean, median = median)
+## 
+##   # Auto named with `tibble::lst()`: 
+##   tibble::lst(mean, median)
+## 
+##   # Using lambdas
+##   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## This warning is displayed once per session.
+</code></pre><pre><code>## Observations: 1
+## Variables: 20
+## $ Time_mean      &lt;dbl&gt; 42.73806
+## $ time_lap1_mean &lt;dbl&gt; 7.097244
+## $ time_lap2_mean &lt;dbl&gt; 9.040076
+## $ Group_mean     &lt;dbl&gt; 4.179657
+## $ Time_min       &lt;dbl&gt; 39.937
+## $ time_lap1_min  &lt;dbl&gt; 6.55
+## $ time_lap2_min  &lt;dbl&gt; 8.46
+## $ Group_min      &lt;int&gt; 1
+## $ Time_max       &lt;dbl&gt; 101.82
+## $ time_lap1_max  &lt;dbl&gt; 19.55
+## $ time_lap2_max  &lt;dbl&gt; 34.68
+## $ Group_max      &lt;int&gt; 21
+## $ Time_sd        &lt;dbl&gt; 3.987916
+## $ time_lap1_sd   &lt;dbl&gt; 0.3780306
+## $ time_lap2_sd   &lt;dbl&gt; 0.8095224
+## $ Group_sd       &lt;dbl&gt; 3.223808
+## $ Time_var       &lt;dbl&gt; 15.90347
+## $ time_lap1_var  &lt;dbl&gt; 0.1429072
+## $ time_lap2_var  &lt;dbl&gt; 0.6553265
+## $ Group_var      &lt;dbl&gt; 10.39294
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Skater_Sum_1_final <span style="color:#f92672">&lt;-</span>Skater_Sum_1<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#f92672">-</span>Group_mean,<span style="color:#f92672">-</span>Group_sd,<span style="color:#f92672">-</span>Group_var)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">glimpse</span>()
+</code></pre></div><pre><code>## Observations: 1
+## Variables: 17
+## $ Time_mean      &lt;dbl&gt; 42.73806
+## $ time_lap1_mean &lt;dbl&gt; 7.097244
+## $ time_lap2_mean &lt;dbl&gt; 9.040076
+## $ Time_min       &lt;dbl&gt; 39.937
+## $ time_lap1_min  &lt;dbl&gt; 6.55
+## $ time_lap2_min  &lt;dbl&gt; 8.46
+## $ Group_min      &lt;int&gt; 1
+## $ Time_max       &lt;dbl&gt; 101.82
+## $ time_lap1_max  &lt;dbl&gt; 19.55
+## $ time_lap2_max  &lt;dbl&gt; 34.68
+## $ Group_max      &lt;int&gt; 21
+## $ Time_sd        &lt;dbl&gt; 3.987916
+## $ time_lap1_sd   &lt;dbl&gt; 0.3780306
+## $ time_lap2_sd   &lt;dbl&gt; 0.8095224
+## $ Time_var       &lt;dbl&gt; 15.90347
+## $ time_lap1_var  &lt;dbl&gt; 0.1429072
+## $ time_lap2_var  &lt;dbl&gt; 0.6553265
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Skater_Sum <span style="color:#f92672">&lt;-</span> No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">group_by</span>(Name)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#f92672">-</span>Group)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">summarize_if</span>(is.numeric,<span style="color:#a6e22e">funs</span>(mean,min,max,sd,var))
+Skater_Sum_NA <span style="color:#f92672">&lt;-</span> Skater_Sum<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">na.omit</span>()
+</code></pre></div><h2 id="wrangling">Wrangling</h2>
+<p>The function filter() was used to find the information pertaining only to the popular skater named Yuri CONFORTOLA and then summarize() was utilized to find his fastest (aka lowest) total time which was 41.562 seconds. Select() was used to make a dataset without Skater Number (Num_Skater) since the data already has skater names so you can identify the skater and you don&rsquo;t have to look at excess and repetitive data. To look at the means of the skaters&rsquo; first laps, arrange() was utilized to arrange by lap one mean times and group_by() was used to look at the the data set by the skaters&rsquo; names. This showed that Liam McFarlane has the lowest and therefore the fastest mean lap one time of 6.895556 seconds. Lastly, mutate() was used to create a new variable called &ldquo;total_lap&rdquo; that was a function of the variables &ldquo;time_lap1&rdquo; and &ldquo;time_lap2&rdquo; to see who had the fastest combined time. It turns out the fast combined lap time was 15.05 ssecond from the seasons spanning 2012-2016 and there were three skaters who were able to obtain the fastest score throughout the years: Vladimir Grigorev, Patrick Duffy, and Bufberg Suh Fabrice.
+Summary statistics was used to find the mean, min, max, sd, and var for each of the numeric variables both overall and after grouping by one of the categorical variables which in this case was by the skater name. The variable &ldquo;Group&rdquo; was dropped for this analysis beacuse it did not make practial sense to find the summary statistics for it as it provided no useable data since there is no such thing as having a mean, max, min, etc. of an arbitrary assigned group number.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">cor <span style="color:#f92672">&lt;-</span> Skater_Sum_NA<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select_if</span>(is.numeric)
+Skater_Sum_NA_cor <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">cor</span>(cor)<span style="color:#f92672">%&gt;%</span>as.data.frame<span style="color:#f92672">%&gt;%</span>rownames_to_column<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">pivot_longer</span>(<span style="color:#ae81ff">-1</span>,names_to<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name&#34;</span>,values_to<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;correlation&#34;</span>)
+<span style="color:#a6e22e">glimpse</span>(Skater_Sum_NA_cor)
+</code></pre></div><pre><code>## Observations: 225
+## Variables: 3
+## $ rowname     &lt;chr&gt; &quot;Time_mean&quot;, &quot;Time_mean&quot;, &quot;Time_mean&quot;, &quot;Time_mean&quot;, &quot;Time…
+## $ name        &lt;chr&gt; &quot;Time_mean&quot;, &quot;time_lap1_mean&quot;, &quot;time_lap2_mean&quot;, &quot;Time_mi…
+## $ correlation &lt;dbl&gt; 1.00000000, 0.58719659, 0.81705848, 0.68675184, 0.6114404…
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Skater_Sum_NA<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select_if</span>(is.numeric)<span style="color:#f92672">%&gt;%</span>cor<span style="color:#f92672">%&gt;%</span>as.data.frame<span style="color:#f92672">%&gt;%</span>rownames_to_column<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">pivot_longer</span>(<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">aes</span>(rowname,name,fill<span style="color:#f92672">=</span>value))<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_tile</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_text</span>(<span style="color:#a6e22e">aes</span>(label<span style="color:#f92672">=</span><span style="color:#a6e22e">round</span>(value,<span style="color:#ae81ff">2</span>)))<span style="color:#f92672">+</span><span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_fill_gradient2</span>(low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>,high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">theme</span>(axis.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle<span style="color:#f92672">=</span><span style="color:#ae81ff">90</span>, hjust<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Lap_2_Time_Min <span style="color:#f92672">&lt;-</span> Skater_Sum_NA<span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>)
+time_lap2_plot <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(data <span style="color:#f92672">=</span> Lap_2_Time_Min, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> time_lap2_min, y <span style="color:#f92672">=</span> Time_min, color <span style="color:#f92672">=</span>Name)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_point</span>() 
+time_lap2_plot <span style="color:#f92672">+</span> <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;Skaters&#39; Min Lap 2 Times by Skater Name&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Total Minimum Time (seconds)&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Minimum Lap 2 Time (seconds)&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_color_manual</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Name&#34;</span>, labels <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Adam FILIPOWICZ&#34;</span>, <span style="color:#e6db74">&#34;AGDESTEIN Einar&#34;</span>, <span style="color:#e6db74">&#34;Akash ARADHYA&#34;</span>, <span style="color:#e6db74">&#34;Alexander FATHOULLIN&#34;</span>, <span style="color:#e6db74">&#34;Aliaksandr ANTANENKA&#34;</span>, <span style="color:#e6db74">&#34;Aliaksandr VOLKAU&#34;</span>, <span style="color:#e6db74">&#34;ALMEY Jens&#34;</span>, <span style="color:#e6db74">&#34;Alvaro PENA&#34;</span>, <span style="color:#e6db74">&#34;AN Kai&#34;</span>, <span style="color:#e6db74">&#34;AN Victor&#34;</span>), values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;pink&#34;</span>, <span style="color:#e6db74">&#34;purple&#34;</span>, <span style="color:#e6db74">&#34;red&#34;</span>, <span style="color:#e6db74">&#34;green&#34;</span>, <span style="color:#e6db74">&#34;blue&#34;</span>, <span style="color:#e6db74">&#34;magenta&#34;</span>, <span style="color:#e6db74">&#34;orange&#34;</span>, <span style="color:#e6db74">&#34;gray&#34;</span>, <span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#e6db74">&#34;yellow&#34;</span>))
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">No_Num_Name_Skater <span style="color:#f92672">&lt;-</span> No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#f92672">-</span>Name)
+ggplot02 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(No_Num_Name_Skater, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Group,Time))<span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_point</span>(size<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,<span style="color:#a6e22e">aes</span>(color<span style="color:#f92672">=</span> time_lap2))<span style="color:#f92672">+</span><span style="color:#a6e22e">scale_color_gradient</span>(low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme</span>(axis.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle<span style="color:#f92672">=</span><span style="color:#ae81ff">90</span>, hjust<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+ggplot02 <span style="color:#f92672">+</span> <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34; Total Time and Group Number by Lap 2 Times &#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Total Times (sec)&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Group Number&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">scale_x_continuous</span>(breaks <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">5</span>))
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<h2 id="visualizing">Visualizing</h2>
+<p>The correlation values for the numeric variables were found and used to make a correlation heatmap. This gave an indication of which variables had the highest correlations which was later used to create another additional ggplot() graph to further explore the realtionship that existed between those two variables. The argument select_if(is.numeric) was used to insure that only the numeric values would be used for the correlation heat map and a categorical variable was not in the mix. Naturally anything had a correlation of 1 with itself. Only a handful of variables had a high correlation value of 0.8-0.9 with each other.
+I choose to create the graph comparing the summary statistics values of lap 1 and 2 minimum times by the skaters&rsquo; names since the minimum lap 1 and 2 times had a high correlation value of 0.97. Interestingly, the graph showed a linear relationship for the first 10 skaters choosen alphabetically. The positive linear realtionship made sense in the fact that if a skater was fast and scored on the lower end for the first lap, they would likely also have a fast and low numberical value for their lap 2 time. The interesting aspect of the graph was that, by coincidence, the first 10 skaters ended up displaying a positive straight line moving to the right in the first quadrant of the graph. Tnere existed a possibility for them to be clustered on one section of the graph or perhaps in patches across the graph in a fashion similar to the times of skaters Almey Jens and An Kai but instead, their data displayed a nearly straight line.
+As mentioned earlier in the introduction, I wanted to see if a relationship existed between skater times and some random number the athletes were assigned as their group numbers. According to the graph that explores the total overall times and group numbers of the skaters by their lap 2 times, it seemed that group numbers 11 and after contained less of the slower skaters than group numbers 10 and before. That being said, there were more skaters in the earlier numbered groups, particularly groups 1-8, so by probability they are more likely to have contained slower skaters. Overall, there was not a definitive relationship between group number and skater times since the arrangement of slower skaters towards the first half of the group numbers may have been due to chance alone and no clear pattern exisited in the data itself though it was still an interesting aspect of the data to explore.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(cluster)
+sil_width<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">vector</span>()
+<span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>){
+skate<span style="color:#f92672">&lt;-</span>No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">pam</span>(k<span style="color:#f92672">=</span>i,diss<span style="color:#f92672">=</span>T)
+sil_width[i] <span style="color:#f92672">&lt;-</span> skate<span style="color:#f92672">$</span>silinfo<span style="color:#f92672">$</span>avg.width
+}
+</code></pre></div><pre><code>## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+
+## Warning in as.dist.default(x): non-square matrix
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_path</span>(<span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>,y<span style="color:#f92672">=</span>sil_width[2<span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]))
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(GGally)
+</code></pre></div><pre><code>## 
+## Attaching package: 'GGally'
+</code></pre><pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     nasa
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">skateclust<span style="color:#f92672">&lt;-</span>No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">pam</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">ggpairs</span>(columns <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">No_Num_Skater<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">mutate</span>(cluster<span style="color:#f92672">=</span><span style="color:#a6e22e">as.factor</span>(skateclust<span style="color:#f92672">$</span>clustering))<span style="color:#f92672">%&gt;%</span><span style="color:#a6e22e">ggpairs</span>(columns <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,<span style="color:#a6e22e">aes</span>(color<span style="color:#f92672">=</span>cluster))
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<h2 id="dimensionality-reduction">Dimensionality Reduction</h2>
+<p>I ran library(cluster) and library(GGally) to import the fucntions into the environment so the code will run correctly and the document will knit. The data set skate was creating containing columns 1-4 and used to calculate the distances (dissimilarities) in the data in order to find the closest cluster for each observation. Pam(k=i,diss=T) was used to find the number of clusters that would be used. The vector sil_width was created to house the the average dissimilarity between i and all other objects in the data set skate. Then a ggplot was created with sil_width[2:10] on the y-axis and k values 2-10 on the x-axis to visualize the value of k that would be used later. <br>
+The data set skateclust was created with 2 clusters (k=2) now that the value of k was known.Then ggpair() with color was run to visualize the data with the clearest separation amongst the clusters. Clustering was used to partition the data into several groups based on their similarity and PAM was used to find data clusters with minimal average dissimilarity to all the objects in the cluster called medoids that are centrally located in clusters. The highest correlation was between time lap 2 and time with a value of 0.481 followed by time lap 2 and time lap 1 with a value of 0.292 and then time lap 1 and time with a value of 0.251. It seems that the observations related to times had a higher correlation with each other than any of the times did with the group numbers. Group is also the only variable that has a cluster that has a negative correlation with the other variables, namely cluster cluster two, so the two variables would move in opposite directions. This would explain why the curved density distributions between the two clusters are almost exactly in line with each other for time, time_lap1, and time_lap2 however for group there is a clear distinction between the two clusters. The first cluster has four distinct sections or dramatic dips while the second cluster has less dramatic dips and there are less distinct sections though the range for cluster 2 is greater than the range for cluster 1.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../js/docs.min.js"></script>
+<script src="../js/main.js"></script>
+
+<script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

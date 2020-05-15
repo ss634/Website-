@@ -10,7 +10,7 @@ Shreya Singh (ss77555)
 
 The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld "ss1" contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled "ss2" contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters' numbers, and the skaters' names. Speed skating has always been interesting since it is hard to believe humans can race several miles per hour at very difficult angles. I wanted to see how skaters fared against one another spanning several seasons since the fastest person durnig one season may not be the fastest in another season. I also wanted to see what the fastest time was during those seasons and if it was held by the same person throughout the seasons. Additionally, I was interested to see if there would perhaps be any corrolation between a skater's group number and their times though I suspected this would not be the case since the group number should have just been an arbitrary number assigned to the skaters which have no bearing on their performance. 
 
-```{r setup, include=FALSE}
+```{r}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(tidyr)
@@ -22,7 +22,7 @@ ss2 <-ss%>%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-D
 
 # Including Plots
 
-```{r pressure, echo=FALSE}
+```{r}
 ss1_longer1 <- ss1%>%pivot_longer(cols=c("time_lap1","time_lap2"), names_to="time_lap", values_to="Values")
 ss2_longer<- ss2 %>% pivot_longer(cols = c("Name"), names_to = "Skater Info", values_to = "Value")
 ```

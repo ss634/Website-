@@ -11,18 +11,19 @@ output:
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names. Speed skating has always been interesting since it is hard to believe humans can race several miles per hour at very difficult angles. I wanted to see how skaters fared against one another spanning several seasons since the fastest person durnig one season may not be the fastest in another season. I also wanted to see what the fastest time was during those seasons and if it was held by the same person throughout the seasons. Additionally, I was interested to see if there would perhaps be any corrolation between a skater’s group number and their times though I suspected this would not be the case since the group number should have just been an arbitrary number assigned to the skaters which have no bearing on their performance.</p>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
 </div>
-<div id="pivot-use" class="section level2">
-<h2>Pivot Use</h2>
+<div id="including-plots" class="section level1">
+<h1>Including Plots</h1>
+</div>
+<div id="pivot-use" class="section level1">
+<h1>Pivot Use</h1>
 <p>Utilzing pivot_longer() to tidy the data for both datasets and go from wide to long data.</p>
 <pre class="r"><code>skating &lt;- ss1%&gt;%full_join(ss2)</code></pre>
 <pre><code>## Joining, by = &quot;Time&quot;</code></pre>
 <pre class="r"><code>skating_NA &lt;- skating %&gt;% na.omit()</code></pre>
 </div>
-<div id="joiningmerging" class="section level2">
-<h2>Joining/Merging</h2>
+<div id="joiningmerging" class="section level1">
+<h1>Joining/Merging</h1>
 <p>I used full_join() to combine both datas by the variable “Time” that they both contained. Full_join() was the best option since I wanted to keep all the skaters, keep all the other variables and have them be their own column, and have “Time” as its own column as well. I omitted any NAs as they would not be useful when trying to gather facts such as mean, max, sd, etc. later on.</p>
 <pre class="r"><code>skating_NA%&gt;% filter(Name==&quot;Yuri CONFORTOLA&quot;)%&gt;%summarize(min(Time))</code></pre>
 <pre><code>##   min(Time)
@@ -105,8 +106,8 @@ glimpse(skater_mean_lap1)</code></pre>
 <pre class="r"><code>Skater_Sum &lt;- No_Num_Skater%&gt;%group_by(Name)%&gt;%select(-Group)%&gt;%summarize_if(is.numeric,funs(mean,min,max,sd,var))
 Skater_Sum_NA &lt;- Skater_Sum%&gt;%na.omit()</code></pre>
 </div>
-<div id="wrangling" class="section level2">
-<h2>Wrangling</h2>
+<div id="wrangling" class="section level1">
+<h1>Wrangling</h1>
 <p>The function filter() was used to find the information pertaining only to the popular skater named Yuri CONFORTOLA and then summarize() was utilized to find his fastest (aka lowest) total time which was 41.562 seconds. Select() was used to make a dataset without Skater Number (Num_Skater) since the data already has skater names so you can identify the skater and you don’t have to look at excess and repetitive data. To look at the means of the skaters’ first laps, arrange() was utilized to arrange by lap one mean times and group_by() was used to look at the the data set by the skaters’ names. This showed that Liam McFarlane has the lowest and therefore the fastest mean lap one time of 6.895556 seconds. Lastly, mutate() was used to create a new variable called “total_lap” that was a function of the variables “time_lap1” and “time_lap2” to see who had the fastest combined time. It turns out the fast combined lap time was 15.05 ssecond from the seasons spanning 2012-2016 and there were three skaters who were able to obtain the fastest score throughout the years: Vladimir Grigorev, Patrick Duffy, and Bufberg Suh Fabrice. Summary statistics was used to find the mean, min, max, sd, and var for each of the numeric variables both overall and after grouping by one of the categorical variables which in this case was by the skater name. The variable “Group” was dropped for this analysis beacuse it did not make practial sense to find the summary statistics for it as it provided no useable data since there is no such thing as having a mean, max, min, etc. of an arbitrary assigned group number.</p>
 <pre class="r"><code>cor &lt;- Skater_Sum_NA%&gt;%select_if(is.numeric)
 Skater_Sum_NA_cor &lt;-cor(cor)%&gt;%as.data.frame%&gt;%rownames_to_column%&gt;%pivot_longer(-1,names_to=&quot;name&quot;,values_to=&quot;correlation&quot;)
@@ -127,8 +128,8 @@ ggplot02 &lt;- ggplot(No_Num_Name_Skater, aes(x = Group,Time))+ geom_point(size=
 ggplot02 + ggtitle(&quot; Total Time and Group Number by Lap 2 Times &quot;) + ylab(&quot;Total Times (sec)&quot;) + xlab(&quot;Group Number&quot;) + scale_x_continuous(breaks = seq(0, 50,5))</code></pre>
 <p><img src="/project1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
-<div id="visualizing" class="section level2">
-<h2>Visualizing</h2>
+<div id="visualizing" class="section level1">
+<h1>Visualizing</h1>
 <p>The correlation values for the numeric variables were found and used to make a correlation heatmap. This gave an indication of which variables had the highest correlations which was later used to create another additional ggplot() graph to further explore the realtionship that existed between those two variables. The argument select_if(is.numeric) was used to insure that only the numeric values would be used for the correlation heat map and a categorical variable was not in the mix. Naturally anything had a correlation of 1 with itself. Only a handful of variables had a high correlation value of 0.8-0.9 with each other. I choose to create the graph comparing the summary statistics values of lap 1 and 2 minimum times by the skaters’ names since the minimum lap 1 and 2 times had a high correlation value of 0.97. Interestingly, the graph showed a linear relationship for the first 10 skaters choosen alphabetically. The positive linear realtionship made sense in the fact that if a skater was fast and scored on the lower end for the first lap, they would likely also have a fast and low numberical value for their lap 2 time. The interesting aspect of the graph was that, by coincidence, the first 10 skaters ended up displaying a positive straight line moving to the right in the first quadrant of the graph. Tnere existed a possibility for them to be clustered on one section of the graph or perhaps in patches across the graph in a fashion similar to the times of skaters Almey Jens and An Kai but instead, their data displayed a nearly straight line. As mentioned earlier in the introduction, I wanted to see if a relationship existed between skater times and some random number the athletes were assigned as their group numbers. According to the graph that explores the total overall times and group numbers of the skaters by their lap 2 times, it seemed that group numbers 11 and after contained less of the slower skaters than group numbers 10 and before. That being said, there were more skaters in the earlier numbered groups, particularly groups 1-8, so by probability they are more likely to have contained slower skaters. Overall, there was not a definitive relationship between group number and skater times since the arrangement of slower skaters towards the first half of the group numbers may have been due to chance alone and no clear pattern exisited in the data itself though it was still an interesting aspect of the data to explore.</p>
 <pre class="r"><code>library(cluster)
 sil_width&lt;-vector()
@@ -167,9 +168,8 @@ No_Num_Skater%&gt;%ggpairs(columns = 1:4)</code></pre>
 <pre class="r"><code>No_Num_Skater%&gt;%mutate(cluster=as.factor(skateclust$clustering))%&gt;%ggpairs(columns = 1:4,aes(color=cluster))</code></pre>
 <p><img src="/project1_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 </div>
-<div id="dimensionality-reduction" class="section level2">
-<h2>Dimensionality Reduction</h2>
+<div id="dimensionality-reduction" class="section level1">
+<h1>Dimensionality Reduction</h1>
 <p>I ran library(cluster) and library(GGally) to import the fucntions into the environment so the code will run correctly and the document will knit. The data set skate was creating containing columns 1-4 and used to calculate the distances (dissimilarities) in the data in order to find the closest cluster for each observation. Pam(k=i,diss=T) was used to find the number of clusters that would be used. The vector sil_width was created to house the the average dissimilarity between i and all other objects in the data set skate. Then a ggplot was created with sil_width[2:10] on the y-axis and k values 2-10 on the x-axis to visualize the value of k that would be used later.<br />
 The data set skateclust was created with 2 clusters (k=2) now that the value of k was known.Then ggpair() with color was run to visualize the data with the clearest separation amongst the clusters. Clustering was used to partition the data into several groups based on their similarity and PAM was used to find data clusters with minimal average dissimilarity to all the objects in the cluster called medoids that are centrally located in clusters. The highest correlation was between time lap 2 and time with a value of 0.481 followed by time lap 2 and time lap 1 with a value of 0.292 and then time lap 1 and time with a value of 0.251. It seems that the observations related to times had a higher correlation with each other than any of the times did with the group numbers. Group is also the only variable that has a cluster that has a negative correlation with the other variables, namely cluster cluster two, so the two variables would move in opposite directions. This would explain why the curved density distributions between the two clusters are almost exactly in line with each other for time, time_lap1, and time_lap2 however for group there is a clear distinction between the two clusters. The first cluster has four distinct sections or dramatic dips while the second cluster has less dramatic dips and there are less distinct sections though the range for cluster 2 is greater than the range for cluster 1.</p>
-</div>
 </div>
