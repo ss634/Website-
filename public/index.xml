@@ -39,8 +39,7 @@
       
       <guid>/project1/</guid>
       <description>Shreya Singh (ss77555)
-Introduction
-The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names.</description>
+Introduction The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names.</description>
     </item>
     
     <item>
