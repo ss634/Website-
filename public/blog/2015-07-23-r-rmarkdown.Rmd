@@ -1,7 +1,7 @@
 ---
 title: "Python Use"
 author: "Shreya Singh"
-date: "2019-14-05"
+date: "2020-05-14"
 categories: []
 tags: []
 ---
@@ -32,6 +32,6 @@ Solution by using re.findall() to match restriction enzyme binding sites ANTAAT 
 ```{python}
 re.findall(r'(A.TAAT)|(GC[AG][AT]TG)', string5)
 ```
-Answer: I was expecting to make 4 cuts and 5 fragments
+Answer: I was expecting to make 4 cuts and 5 fragments.
 
-![](pythonpic.png)
+![](/img/pythonpic.png){width=50%}

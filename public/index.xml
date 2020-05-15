@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Python Use</title>
+      <link>/blog/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
+      <description>library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkably useful in many aspects including biology. When working in labs, there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in Homework 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation.</description>
+    </item>
+    
+    <item>
       <title>Projects</title>
       <link>/projects/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
@@ -42,15 +51,6 @@ The data for this project explores the world of short track speed skating via da
       <guid>/project2/</guid>
       <description>library(tidyr) set.seed(348) library(ggplot2) library(sandwich) library(lmtest) library(tidyverse) library(glmnet) library(Matrix) library(dbplyr) Shreya Singh (ss77555)
 Introduction This dataset concerning lung cancer had 59 observations per 8 columns. The variables included Name, Surname, Age, number of smokes (Smokes), Area of cancer per cubic centimeter (AreaQ), number of alcoholic drinks (Alkhol), location of the patient to see if they lived in the city or a rural area (Loc), and whether the patient had cancer or not (Result).</description>
-    </item>
-    
-    <item>
-      <title>Python Use</title>
-      <link>/blog/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkably useful in many aspects including biology. When working in labs, there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in Homework 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation.</description>
     </item>
     
   </channel>
