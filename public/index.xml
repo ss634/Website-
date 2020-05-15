@@ -50,7 +50,7 @@ Introduction This dataset concerning lung cancer had 59 observations per 8 colum
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>install.packages(&amp;quot;reticulate&amp;quot;) ## Installing package into &amp;#39;/stor/home/ss77555/R/x86_64-pc-linux-gnu-library/3.4&amp;#39; ## (as &amp;#39;lib&amp;#39; is unspecified) library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkable useful even many aspects including biology. Working in labs there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in HW 11 from my SDS348 class.</description>
+      <description>library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkably useful in many aspects including biology. When working in labs, there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in HW 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation.</description>
     </item>
     
   </channel>

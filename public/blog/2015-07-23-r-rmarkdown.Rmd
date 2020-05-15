@@ -13,14 +13,13 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 
 ```{r cars}
-install.packages("reticulate")
 library(reticulate)
 ```
 
 
 # Python
 
-Lately we've been learning new features via python and they have been been remarkable useful even many aspects including biology. Working in labs there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in HW 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation. The function re.findall() was used to find all the matches and return them as a list of strings, with each string representing one match. 
+Lately we've been learning new features via python and they have been been remarkably useful in many aspects including biology. When working in labs, there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in HW 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation. The function re.findall() was used to find all the matches and return them as a list of strings, with each string representing one match. 
 
 # DNA Question
 Note that per the IUPAC nucleotide code, N is any base, R is A or G, W is A or T. 
