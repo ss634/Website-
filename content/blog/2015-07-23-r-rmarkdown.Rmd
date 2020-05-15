@@ -34,4 +34,4 @@ re.findall(r'(A.TAAT)|(GC[AG][AT]TG)', string5)
 ```
 Answer: I was expecting to make 4 cuts and 5 fragments.
 
-![](/img/pythonpic.png){width=50%}
+![](/img/pythonpic.png){width=70%}
