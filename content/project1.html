@@ -11,9 +11,25 @@ output:
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names. Speed skating has always been interesting since it is hard to believe humans can race several miles per hour at very difficult angles. I wanted to see how skaters fared against one another spanning several seasons since the fastest person durnig one season may not be the fastest in another season. I also wanted to see what the fastest time was during those seasons and if it was held by the same person throughout the seasons. Additionally, I was interested to see if there would perhaps be any corrolation between a skater’s group number and their times though I suspected this would not be the case since the group number should have just been an arbitrary number assigned to the skaters which have no bearing on their performance.</p>
+<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidyr)
+ss &lt;- read.csv(&quot;~/m500_lap_time_rank_ver5.csv&quot;)
+ss1 &lt;-ss%&gt;%select(-Season,-Series,-Day,-City,-Group,-Group,-Country,-Year,-Month,-Distance,-Round,-Num_Skater,-Name,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
+ss2 &lt;-ss%&gt;%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-Distance,-Round,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-time_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)</code></pre>
 </div>
 <div id="including-plots" class="section level1">
 <h1>Including Plots</h1>
+<pre class="r"><code>ss1_longer1 &lt;- ss1%&gt;%pivot_longer(cols=c(&quot;time_lap1&quot;,&quot;time_lap2&quot;), names_to=&quot;time_lap&quot;, values_to=&quot;Values&quot;)
+ss2_longer&lt;- ss2 %&gt;% pivot_longer(cols = c(&quot;Name&quot;), names_to = &quot;Skater Info&quot;, values_to = &quot;Value&quot;)</code></pre>
 </div>
 <div id="pivot-use" class="section level1">
 <h1>Pivot Use</h1>
@@ -118,15 +134,15 @@ glimpse(Skater_Sum_NA_cor)</code></pre>
 ## $ name        &lt;chr&gt; &quot;Time_mean&quot;, &quot;time_lap1_mean&quot;, &quot;time_lap2_mean&quot;, &quot;Time_mi…
 ## $ correlation &lt;dbl&gt; 1.00000000, 0.58719659, 0.81705848, 0.68675184, 0.6114404…</code></pre>
 <pre class="r"><code>Skater_Sum_NA%&gt;%select_if(is.numeric)%&gt;%cor%&gt;%as.data.frame%&gt;%rownames_to_column%&gt;%pivot_longer(-1)%&gt;%ggplot(aes(rowname,name,fill=value))+geom_tile()+geom_text(aes(label=round(value,2)))+xlab(&quot;&quot;)+ylab(&quot;&quot;)+scale_fill_gradient2(low=&quot;red&quot;,high=&quot;blue&quot;)+theme(axis.text.x = element_text(angle=90, hjust=1))</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>Lap_2_Time_Min &lt;- Skater_Sum_NA%&gt;% slice(1:10)
 time_lap2_plot &lt;- ggplot(data = Lap_2_Time_Min, aes(x = time_lap2_min, y = Time_min, color =Name)) + geom_point() 
 time_lap2_plot + ggtitle(&quot;Skaters&#39; Min Lap 2 Times by Skater Name&quot;) + ylab(&quot;Total Minimum Time (seconds)&quot;) + xlab(&quot;Minimum Lap 2 Time (seconds)&quot;) + scale_color_manual(name = &quot;Name&quot;, labels = c(&quot;Adam FILIPOWICZ&quot;, &quot;AGDESTEIN Einar&quot;, &quot;Akash ARADHYA&quot;, &quot;Alexander FATHOULLIN&quot;, &quot;Aliaksandr ANTANENKA&quot;, &quot;Aliaksandr VOLKAU&quot;, &quot;ALMEY Jens&quot;, &quot;Alvaro PENA&quot;, &quot;AN Kai&quot;, &quot;AN Victor&quot;), values = c(&quot;pink&quot;, &quot;purple&quot;, &quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;magenta&quot;, &quot;orange&quot;, &quot;gray&quot;, &quot;black&quot;, &quot;yellow&quot;))</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>No_Num_Name_Skater &lt;- No_Num_Skater%&gt;%select(-Name)
 ggplot02 &lt;- ggplot(No_Num_Name_Skater, aes(x = Group,Time))+ geom_point(size=3,aes(color= time_lap2))+scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;) + theme(axis.text.x = element_text(angle=90, hjust=1))
 ggplot02 + ggtitle(&quot; Total Time and Group Number by Lap 2 Times &quot;) + ylab(&quot;Total Times (sec)&quot;) + xlab(&quot;Group Number&quot;) + scale_x_continuous(breaks = seq(0, 50,5))</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="visualizing" class="section level1">
 <h1>Visualizing</h1>
@@ -155,7 +171,7 @@ sil_width[i] &lt;- skate$silinfo$avg.width
 
 ## Warning in as.dist.default(x): non-square matrix</code></pre>
 <pre class="r"><code>ggplot()+geom_path(aes(x=2:10,y=sil_width[2:10]))</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <pre class="r"><code>library(GGally)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;GGally&#39;</code></pre>
@@ -164,9 +180,9 @@ sil_width[i] &lt;- skate$silinfo$avg.width
 ##     nasa</code></pre>
 <pre class="r"><code>skateclust&lt;-No_Num_Skater%&gt;%select(1:4)%&gt;%pam(k=2)
 No_Num_Skater%&gt;%ggpairs(columns = 1:4)</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>No_Num_Skater%&gt;%mutate(cluster=as.factor(skateclust$clustering))%&gt;%ggpairs(columns = 1:4,aes(color=cluster))</code></pre>
-<p><img src="/project1_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p><img src="/project1_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
 </div>
 <div id="dimensionality-reduction" class="section level1">
 <h1>Dimensionality Reduction</h1>

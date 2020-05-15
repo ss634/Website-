@@ -20,14 +20,13 @@ ss2 <-ss%>%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-D
 ```
 
 
-# Including Plots
+# Pivot Use 
 
 ```{r}
 ss1_longer1 <- ss1%>%pivot_longer(cols=c("time_lap1","time_lap2"), names_to="time_lap", values_to="Values")
 ss2_longer<- ss2 %>% pivot_longer(cols = c("Name"), names_to = "Skater Info", values_to = "Value")
 ```
 
-# Pivot Use 
 Utilzing pivot_longer() to tidy the data for both datasets and go from wide to long data.
 
 ```{r}
