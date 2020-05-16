@@ -1,5 +1,5 @@
 ---
-title: "Project"
+title: "Project 1: Exploratory Data Analysis"
 output:
   pdf_document: default
   html_document: default
@@ -18,7 +18,6 @@ ss <- read.csv("~/m500_lap_time_rank_ver5.csv")
 ss1 <-ss%>%select(-Season,-Series,-Day,-City,-Group,-Group,-Country,-Year,-Month,-Distance,-Round,-Num_Skater,-Name,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
 ss2 <-ss%>%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-Distance,-Round,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-time_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
 ```
-
 
 # Pivot Use 
 

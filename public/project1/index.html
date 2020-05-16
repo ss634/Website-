@@ -7,7 +7,7 @@
     <meta name="author" content="Shreya Singh" />
     <meta name="description" content="Describe your website">
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
-    <title>Project</title>
+    <title>Project 1: Exploratory Data Analysis</title>
     <meta name="generator" content="Hugo 0.70.0" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/main.css" />
@@ -56,7 +56,7 @@
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="../project1/">Project</a></strong>
+            <strong><a href="../project1/">Project 1: Exploratory Data Analysis</a></strong>
           </h3>
         </div>
         <div class="blog-title">
@@ -91,13 +91,10 @@ ss &lt;- read.csv(&quot;~/m500_lap_time_rank_ver5.csv&quot;)
 ss1 &lt;-ss%&gt;%select(-Season,-Series,-Day,-City,-Group,-Group,-Country,-Year,-Month,-Distance,-Round,-Num_Skater,-Name,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)
 ss2 &lt;-ss%&gt;%select(-Season,-time_lap1,-Series,-Day,-Country,-City,-Year,-Month,-Distance,-Round,-Nationality,-Rank_In_Group,-Start_Position,-Qualification,-rank_lap1,-rank_lap2,-time_lap2,-rank_lap3,-time_lap3,-rank_lap4,-time_lap4,-rank_lap5,-time_lap5,-Time_Event)</code></pre>
 </div>
-<div id="including-plots" class="section level1">
-<h1>Including Plots</h1>
-<pre class="r"><code>ss1_longer1 &lt;- ss1%&gt;%pivot_longer(cols=c(&quot;time_lap1&quot;,&quot;time_lap2&quot;), names_to=&quot;time_lap&quot;, values_to=&quot;Values&quot;)
-ss2_longer&lt;- ss2 %&gt;% pivot_longer(cols = c(&quot;Name&quot;), names_to = &quot;Skater Info&quot;, values_to = &quot;Value&quot;)</code></pre>
-</div>
 <div id="pivot-use" class="section level1">
 <h1>Pivot Use</h1>
+<pre class="r"><code>ss1_longer1 &lt;- ss1%&gt;%pivot_longer(cols=c(&quot;time_lap1&quot;,&quot;time_lap2&quot;), names_to=&quot;time_lap&quot;, values_to=&quot;Values&quot;)
+ss2_longer&lt;- ss2 %&gt;% pivot_longer(cols = c(&quot;Name&quot;), names_to = &quot;Skater Info&quot;, values_to = &quot;Value&quot;)</code></pre>
 <p>Utilzing pivot_longer() to tidy the data for both datasets and go from wide to long data.</p>
 <pre class="r"><code>skating &lt;- ss1%&gt;%full_join(ss2)</code></pre>
 <pre><code>## Joining, by = &quot;Time&quot;</code></pre>
