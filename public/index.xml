@@ -6,10 +6,32 @@
     <description>Recent content on Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project2/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project2/</guid>
+      <description>library(tidyr) set.seed(348) library(ggplot2) library(sandwich) library(lmtest) library(tidyverse) library(glmnet) library(Matrix) library(dbplyr) Shreya Singh (ss77555)
+Introduction This dataset concerning lung cancer had 59 observations per 8 columns. The variables included Name, Surname, Age, number of smokes (Smokes), Area of cancer per cubic centimeter (AreaQ), number of alcoholic drinks (Alkhol), location of the patient to see if they lived in the city or a rural area (Loc), and whether the patient had cancer or not (Result).</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>Projects Here are some projects I have recently completed:
+  Exploratory Data Analysis with Tidyverse Tools
+  Modeling, Testing, and Classification
+  </description>
+    </item>
     
     <item>
       <title>Python Use</title>
@@ -21,18 +43,6 @@
     </item>
     
     <item>
-      <title>Projects</title>
-      <link>/projects/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/projects/</guid>
-      <description>Projects Here are some projects I have recently completed:
-  Exploratory Data Analysis with Tidyverse Tools
-  Modeling, Testing, and Classification
-  </description>
-    </item>
-    
-    <item>
       <title>Project 1: Exploratory Data Analysis</title>
       <link>/project1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -40,16 +50,6 @@
       <guid>/project1/</guid>
       <description>Shreya Singh (ss77555)
 Introduction The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names.</description>
-    </item>
-    
-    <item>
-      <title>Project 2: Modeling, Testing, and Predicting</title>
-      <link>/project2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project2/</guid>
-      <description>library(tidyr) set.seed(348) library(ggplot2) library(sandwich) library(lmtest) library(tidyverse) library(glmnet) library(Matrix) library(dbplyr) Shreya Singh (ss77555)
-Introduction This dataset concerning lung cancer had 59 observations per 8 columns. The variables included Name, Surname, Age, number of smokes (Smokes), Area of cancer per cubic centimeter (AreaQ), number of alcoholic drinks (Alkhol), location of the patient to see if they lived in the city or a rural area (Loc), and whether the patient had cancer or not (Result).</description>
     </item>
     
   </channel>
