@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Project 1: Exploratory Data Analysis</title>
+      <link>/project1/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project1/</guid>
+      <description>Shreya Singh (ss77555)
+Introduction The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names.</description>
+    </item>
+    
+    <item>
       <title>Project 2: Modeling, Testing, and Predicting</title>
       <link>/project2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
@@ -40,16 +50,6 @@ Introduction This dataset concerning lung cancer had 59 observations per 8 colum
       
       <guid>/blog/2015-07-23-r-rmarkdown/</guid>
       <description>library(reticulate) Python Lately we’ve been learning new features via python and they have been been remarkably useful in many aspects including biology. When working in labs, there are times when we need to analyze DNA sequences but it can get quite tedious to do it by hand. A good example of the application of python in biological analytics was in Homework 11 from my SDS348 class. It utilized a sequence of characters known as string that in this case contained DNA nucleotide bases and asked about its fragmentation.</description>
-    </item>
-    
-    <item>
-      <title>Project 1: Exploratory Data Analysis</title>
-      <link>/project1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project1/</guid>
-      <description>Shreya Singh (ss77555)
-Introduction The data for this project explores the world of short track speed skating via data from the 2012-2016 seasons that was gathered from Kaggle. The first data set labeld “ss1” contains the overall time of the skater as well as the times for their first and second laps around the rink. The second data set labeled “ss2” contains the overall time of the skater as well, which is what the two datasets were joined by, in addition to the group number corressponding to which group the skaters belonged to, the skaters’ numbers, and the skaters’ names.</description>
     </item>
     
   </channel>

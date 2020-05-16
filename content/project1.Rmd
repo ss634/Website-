@@ -3,7 +3,7 @@ title: "Project 1: Exploratory Data Analysis"
 output:
   pdf_document: default
   html_document: default
-  date: '2020-05-14'
+date: "2020-05-14"
 ---
 Shreya Singh (ss77555)
 
